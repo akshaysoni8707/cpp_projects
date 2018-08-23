@@ -1,0 +1,98 @@
+#include <iostream>
+#include<string.h>
+using namespace std;
+class student
+{
+public:
+    int x = 0, n =0, mm=0, ms=0, mc=0;
+    char na[10];
+    char sub[3][10]= {"homework","quizzes","tests"};
+    struct student_information
+    {
+        char name[10];
+        int marksmaths[3];
+        int marksscience[3];
+        int markscomputer[3];
+
+    } lt[4];
+    void get()
+    {
+        int k=0;
+        cout<<"how many students :"<<endl;
+        cin>>n;
+        while(x<n)
+        {
+            cout<<"name of student :"<<endl;
+            cin>>na;
+            strcpy(lt[x].name,na);
+            for(k=0; k<3; k++)
+            {
+                cout<<"marks in maths "<<sub[k]<<endl;
+                cin>>mm;
+
+                cout<<"marks in science "<<sub[k]<<endl;
+                cin>>ms;
+
+                cout<<"marks in computer "<<sub[k]<<endl;
+                cin>>mc;
+                lt[x].markscomputer[k] = mc;
+                lt[x].marksmaths[k] = mm;
+                lt[x].marksscience[k] = ms;
+            }
+            x++;
+        }
+    }
+    void shows()
+    {
+        int l;
+        x=0;
+        while(x<n)
+        {
+            cout<<"Name of student : "<<lt[x].name<<endl;
+            for(l=0; l<3; l++)
+            {
+                cout<<"marks of maths in "<<sub[l]<<" are "<<lt[x].marksmaths[l]<<endl;
+                cout<<"marks of science in "<<sub[l]<<" are "<<lt[x].marksscience[l]<<endl;
+                cout<<"marks of computer in "<<sub[l]<<" are "<<lt[x].markscomputer[l]<<endl;
+            }
+            x++;
+        }
+    }
+
+
+};
+class marksheet
+{
+
+public:
+    void average(student st)
+    {
+        int i = 0,l,total;
+        while(i < st.n)
+        {
+            cout<<"\t\t\tName of student : "<<st.lt[i].name<<endl;
+            for(l=0; l<3; l++)
+            {
+                cout<<"marks of maths "<<st.sub[l]<<" are \t"<<st.lt[i].marksmaths[l]<<endl;
+                cout<<"marks of science "<<st.sub[l]<<" are \t"<<st.lt[i].marksscience[l]<<endl;
+                cout<<"marks of computer "<<st.sub[l]<<" are \t"<<st.lt[i].markscomputer[l]<<endl;
+                total=(st.lt[i].marksmaths[l] + st.lt[i].marksscience[l] + st.lt[i].markscomputer[l]);
+
+                cout<<"\n"<<st.lt[i].name<<"'s total in "<<st.sub[l]<<" is \t"<<total<<endl;
+                cout<<st.lt[i].name<<"'s average in "<<st.sub[l]<<" is \t"<<((float)total/3)<<"\n"<<endl;
+
+            }
+
+            i++;
+        }
+    }
+};
+
+int main()
+{
+    marksheet m;
+    student s;
+    s.get();
+    m.average(s);
+    return 0;
+}
