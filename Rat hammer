@@ -1,0 +1,102 @@
+#include <iostream>
+#include<stdlib.h>
+#include<string.h>
+#include<time.h>
+using namespace std;
+class AI
+{
+public:
+    int rowa, cola;
+    void random_number()
+    {
+        srand(time(NULL));
+        rowa= rand() % 5;
+        cola= rand() % 5;
+    }
+    int getcol()
+    {
+        return cola;
+    }
+    int getrow()
+    {
+        return rowa;
+    }
+
+};
+class game:public AI
+{
+public:
+    char board[5][5]= {{'0','0','0','0','0'},{'0','0','0','0','0'},{'0','0','0','0','0'},{'0','0','0','0','0'},{'0','0','0','0','0'}};
+    void show()
+    {
+        int i,j;
+        for(i=0; i<5; i++)
+        {
+            cout<<"\t\t\t";
+            for(j=0; j<5; j++)
+            {
+                board[i][j];
+                cout<<board[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+    }
+    void gameplay()
+    {
+        int turn=1,e=0,row,col;
+        random_number();
+        cout<<"Try to HIT me with your hammer..."<<endl;
+
+        do
+        {
+            show();
+ak:
+            cout<<"\t\t this is your turn :"<<turn<<endl;
+            ///cout<<getrow()<<" "<<getcol()<<endl;
+            cout<<"\n\t\tTo hit me guess row :"<<endl;
+            cin>>row;
+            cout<<"\n\t\tnow guess column :"<<endl;
+            cin>>col;
+            if(row>5||row<1||col>5||col<1)
+            {
+                cout<<"\n\t\tCome on !!!! you are not in the gamespace ,i am not there...."<<endl;
+                goto ak;
+            }
+            row--;
+            col--;
+            if(row==getrow()&& col==getcol())
+            {
+                cout<<"\t\tAaaaaaah you hit me .......bye"<<endl;
+                e=1;
+                break;
+            }
+            else if(board[row][col]=='X')
+            {
+                cout<<"\t\tYou already hit there...you cant hit there again...."<<endl;
+                turn++;
+            }
+            else
+            {
+                board[row][col]='X';
+                turn++;
+            }
+            if(turn==4)
+            {
+                e=1;
+            }
+        }
+        while(e==0);
+        if(turn==4)
+        {
+            show();
+            cout<<"\n\t\tYour turns are completed .....\n\t\t I am safe no one can HIT me........"<<endl;
+        }
+    }
+};
+
+int main()
+{
+    game a;
+    a.gameplay();
+    return 0;
+}
