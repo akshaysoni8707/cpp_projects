@@ -78,6 +78,7 @@ ak:
             else
             {
                 board[row][col]='X';
+                cout<<"\n\t\t You missed hahahaha........."<<endl;
                 turn++;
             }
             if(turn==4)
